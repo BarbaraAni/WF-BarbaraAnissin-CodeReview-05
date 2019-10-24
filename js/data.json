@@ -1,0 +1,154 @@
+var dateprofiles = [{
+	"id":"0",
+	"pic":"./img/id0.jpg",
+	"name":"Jenny",
+	"quote":"Live,love, laugh",
+	"age":"25",
+	"location":"Vienna",
+	"hobbies":"Yoga, Coffee, Balloons",
+	"special skill":"Skilled Writer"
+},{
+	"id":"1",
+	"pic":"./img/id1.jpg",
+	"name":"Dave",
+	"quote":"See you next beer",
+	"age":"37",
+	"location":"Beavertown",
+	"hobbies":"Beer, beer, beer",
+	"special skill":"drinking without getting drunk"
+},{
+	"id":"2",
+	"pic":"",
+	"name":"",
+	"quote":"",
+	"age":"",
+	"location":"",
+	"hobbies":"",
+	"special skill":""
+},{
+	"id":"3",
+	"pic":"",
+	"name":"",
+	"quote":"",
+	"age":"",
+	"location":"",
+	"hobbies":"",
+	"special skill":""
+},{
+	"id":"4",
+	"pic":"",
+	"name":"",
+	"quote":"",
+	"age":"",
+	"location":"",
+	"hobbies":"",
+	"special skill":""
+},{
+	"id":"5",
+	"pic":"",
+	"name":"",
+	"quote":"",
+	"age":"",
+	"location":"",
+	"hobbies":"",
+	"special skill":""
+},{
+	"id":"6",
+	"pic":"",
+	"name":"",
+	"quote":"",
+	"age":"",
+	"location":"",
+	"hobbies":"",
+	"special skill":""
+},{
+	"id":"7",
+	"pic":"",
+	"name":"",
+	"quote":"",
+	"age":"",
+	"location":"",
+	"hobbies":"",
+	"special skill":""
+},{
+	"id":"8",
+	"pic":"",
+	"name":"",
+	"quote":"",
+	"age":"",
+	"location":"",
+	"hobbies":"",
+	"special skill":""
+},{
+	"id":"9",
+	"pic":"",
+	"name":"",
+	"quote":"",
+	"age":"",
+	"location":"",
+	"hobbies":"",
+	"special skill":""
+},{
+	"id":"10",
+	"pic":"",
+	"name":"",
+	"quote":"",
+	"age":"",
+	"location":"",
+	"hobbies":"",
+	"special skill":""
+},{
+	"id":"11",
+	"pic":"",
+	"name":"",
+	"quote":"",
+	"age":"",
+	"location":"",
+	"hobbies":"",
+	"special skill":""
+},{
+	"id":"12",
+	"pic":"",
+	"name":"",
+	"quote":"",
+	"age":"",
+	"location":"",
+	"hobbies":"",
+	"special skill":""
+},{
+	"id":"13",
+	"pic":"",
+	"name":"",
+	"quote":"",
+	"age":"",
+	"location":"",
+	"hobbies":"",
+	"special skill":""
+},{
+	"id":"14",
+	"pic":"",
+	"name":"",
+	"quote":"",
+	"age":"",
+	"location":"",
+	"hobbies":"",
+	"special skill":""
+},{
+	"id":"15",
+	"pic":"",
+	"name":"",
+	"quote":"",
+	"age":"",
+	"location":"",
+	"hobbies":"",
+	"special skill":""
+},{
+	"id":"16",
+	"pic":"",
+	"name":"",
+	"quote":"",
+	"age":"",
+	"location":"",
+	"hobbies":"",
+	"special skill":""
+}]
