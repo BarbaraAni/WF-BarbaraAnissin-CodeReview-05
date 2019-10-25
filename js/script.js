@@ -2,7 +2,7 @@ let profile = [];
 profile = profiles;
 
 $(document).ready(function() {
-    //append header and nav ul
+    //append HEADER and nav ul
     $("body").append(`
     	<div id="header" class="container"> 
     		<nav class="p-3 list-group-horizontal navbar-nav justify-content-around row bg-dark text-light"> 
@@ -11,7 +11,7 @@ $(document).ready(function() {
     		</nav> 
     	</div>
     	`);
-    //append nav menu
+    //append NAV menu
     $("#navbar").append(`
     	<li><a class="list-group-item-info" href="index.html">Dates</a> </li>
     	<li><a class="list-group-item-info" href="#">Contact</a> </li>
@@ -38,11 +38,9 @@ $(document).ready(function() {
 			<option value="">Pets: under 15y</option>
 		</select>`)
     //gender/pets filter function  //age filter function
-
     document.getElementById("filter1").onclick = function() {
         valG = $("#filter1 :selected").text()
         valA = $("#filter2 :selected").text()
-        console.log($("#filter1 :selected").text())
         select()
     }
     document.getElementById("filter2").onclick = function() {
@@ -50,7 +48,7 @@ $(document).ready(function() {
         valA = $("#filter2 :selected").text()
         select()
     }
-
+    //FILTER function
     function select() {
         for (i = 0; i < profile.length; i++) {
             if (valA === "Pets: under 15y" && valG == profile[i].filter || valA === "Pets: under 15y" && valG === "Gender/Pets - all" || valA === "Age - all" && valG === "Pets" || valA === "Pets: under 15y" && valG === "Pets") {
@@ -92,12 +90,14 @@ $(document).ready(function() {
                 $("#col" + i).show() //show all 
                 $("#placeholder").hide()
             } else {
-                $("#col" + i).hide()
-                $("#placeholder").show()
+                if ($("#col" + i).is(":visible")) {
+                    $("#col" + i).hide()
+                    $("#placeholder").show()
+                } else { console.log("huh?") }
             }
         }
     }
-    //append main content
+    //append MAIN content
     $("body").append(`<div class="container"><div id="maincontent" class="row p-2"></div></div>`)
     for (i = 0; i < profile.length; i++) {
         $("#maincontent").append(`
@@ -106,13 +106,13 @@ $(document).ready(function() {
 	        		<img class="heart" id="bHeart${+i}" src="./img/black_heart.png">
 	        		<img class="heart" id="rHeart${+i}" src="./img/heart.png">
 	        		<br>
-        			<div class="quote p-1"><quote>&quot${profile[i].quote}&quot</quote></div>        		
-        				<div id = "myProgress">
-                    		<div id = "myBar"></div>
-                    	</div>
-                    	<p><span id="progressATM${+i}">0</span>%</p> 
-                    </div>
-                <div>` /* div row end */ )
+        			<div class="quote p-1"><quote>&quot${profile[i].quote}&quot</quote></div>
+        			<div class = "myProgress">
+						<div id = "myBar${+i}""></div>
+                	</div> 
+                	<p class="progressATM"><span id="progressATM${+i}">0</span>%</p>        		
+      			</div>
+            <div>` /* div row end */ )
     }
     //append placeholder for filter error
     $("#maincontent").append(`<p id="placeholder"></p>`)
@@ -120,7 +120,7 @@ $(document).ready(function() {
     $("[id^=rHeart]").hide()
     //hide placeholder for filter error
     $("#placeholder").text("nothing found with these filters, try different ones").hide()
-    //drag and drop
+    //DRAG and drop
     $("#maincontent").sortable()
     $("[id^=col]").draggable({
         connectToSortable: "#maincontent"
@@ -131,7 +131,7 @@ $(document).ready(function() {
     		<div class="h1 m-0 text-center bg-dark text-light">Favourites</div> 
     		<div class="row m-0 mt-2 content col-12 justify-content-between"></div>
     	</div>`)
-    //clickfunction for the hearts
+    //CLICKfunction for the HEARTS
     $(".heart").click(function(e) {
         var idNum = Number((e.target.id).slice(6))
         $("#bHeart" + idNum).toggle();
@@ -139,38 +139,49 @@ $(document).ready(function() {
         var currentbHeart = document.getElementById("bHeart" + idNum)
         if (window.getComputedStyle(currentbHeart).display === "none") {
             $(".content").append(`<div class="col-md-5 col-lg-5 col-sm-10 mb-3 detailText align-self-end" id="favourite${+idNum}">
+            	<div class="cancel" id="cancel${+idNum}"><p>X</p></div>
             	<img class="card-img my-2" src="${profile[idNum].pic}">
             	<div class="col-10 offset-1">
 	            	<p>Name: ${profile[idNum].name}</p>
-	            	<p>Age: ${profile[idNum].age}</p>
+	            	<p>Age: ${profile[idNum].age} ${profile[idNum].y_m}</p>
 	            	<p>Location: ${profile[idNum].location}</p>
 	            	<p>Hobbies: ${profile[idNum].hobbies}</p>
 	            	<p>Special Skill: ${profile[idNum].special_skill}</p>
 	            <div>
             </div>`)
-            var progress = Number($("#progressATM"+idNum).text())
+            var progress = Number($("#progressATM" + idNum).text())
             if (progress <= 99) {
                 progress++;
-                document.getElementById("myBar").style.width = progress + "%";
-                $("#progressATM" + idNum).text(progress)
+                document.getElementById("myBar" + idNum).style.height = progress + 4 + "%";
+                $("#progressATM" + idNum).text(progress + 4) //+4 to get 5% per click
             } else {
-                document.getElementById("myBar").style.width = "100%";
+                document.getElementById("myBar" + idNum).style.height = "100%";
             }
         } else {
             $("#favourite" + idNum).remove()
         }
+        //giving CancelButton it's function
+        $(".cancel").click(function(e) {
+            var actual = Number((this.id).slice(6))
+            $("#favourite" + actual).remove()
+            $("#bHeart" + actual).toggle()
+            $("#rHeart" + actual).toggle()
+        })
+        //CALCulation for width of div of cancal - to be a circle always
+        var cancelHeight = document.getElementById("cancel" + idNum).offsetHeight;
+        document.getElementById("cancel" + idNum).style.width = cancelHeight + "px";
     })
 
 });
 
-//calculations to set heights and widths relative to img and div width
+//CALCulation to set heights and widths relative to img and div width
 function imgHeight() {
     for (i = 0; i < profile.length; i++) {
         var offsetWidth = document.getElementById("profileImg" + i).offsetWidth;
         var divWidth = document.getElementById("col" + i).offsetWidth;
-        var imgHeight = offsetWidth / 16 * 9
-        var heartSize = offsetWidth / 7
-        var divHeight = divWidth / 8 * 7.5
+        var imgHeight = offsetWidth / 16 * 9;
+        var heartSize = offsetWidth / 7;
+        var divHeight = divWidth * 0.8;
         document.getElementById("profileImg" + i).style.height = imgHeight + "px";
         document.getElementById("bHeart" + i).style.width = heartSize + "px";
         document.getElementById("bHeart" + i).style.height = heartSize + "px";
@@ -184,5 +195,20 @@ $(document).ready(imgHeight);
 $(window).resize(imgHeight);
 
 
-//add heart in fav part!!
+
+/////DONE
+//header and navbar - done
+//apply JSON main-part - done
+//hearts added and functions given - done
+//append favourites part + functions - done
+//img's mobile friendly (calculation) - done
+//filter - done
+//drag and drop - done
+//x in favourites added - done
+//processbar - done
+//bootstrap classes and CSS/SASS - done
+
+/////OPEN
 //error msg if filter empty not correct atm
+
+//HOW TO GET ERROR MSG right?

@@ -46,7 +46,7 @@ var profiles = [{
 	"id":"4",
 	"pic":"./img/id4.jpg",
 	"name":"Cathrine",
-	"quote":"The fundamental problem in the modern world: the stupid are cocksure while the intelligent are full of doubt.",
+	"quote":"The stupid are cocksure, while the intelligent are full of doubt.",
 	"age":"30",
 	"y_m":"years",
 	"location":"California",

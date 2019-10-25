@@ -64,7 +64,7 @@ body
 .select
 	box-shadow: 3px 3px 10px 2px grey
 	width: 45%
-	margin: 0 2.3%
+	margin: 0 2%
 	background-color: transparent
 	border: solid transparent
 	border-width: 1px 0
@@ -74,13 +74,68 @@ body
 	margin-top: 10px
 	text-align: center
 
-#myProgress 
-	width: 100%
-	background-color: #ddd
-	height: 15px
-	border: 1px solid black
+.cancel
+	float: right
+	height: 1%
+	border-radius: 50%
+	background-color: grey
+	color: white
+	display: flex
+	justify-content: center
+	align-items: center
+	transform: translate(40%,-10%)
 
-#myBar 
-	width: 0%
-	height: 14px
-	background-color: #4CAF50
+.cancel:hover
+	cursor: pointer
+	background-image: conic-gradient(grey,black,grey,black,grey,black,grey,black,grey)
+
+.cancel p 
+	font-size: 2em
+	margin: 0
+	text-align: center
+
+.progressATM
+	position: absolute
+	top: 55%
+	left: 18%
+	color: black
+	transform: translate(-80%,-50%)
+	background-color: rgba(100,234,255, 0.6)
+	border-radius: 20px
+	padding: 0 10px
+
+.myProgress 
+	height: 77%
+	position: absolute
+	bottom: 23%
+	transform: translate(0,0)
+	width: 13px
+	background-color: #ddd
+	border: 1px solid black
+	border-radius: 7px
+	left: 1%
+
+[id^=myBar] 
+	width: 100%
+	height: 0%
+	background-color: hotpink
+	border-radius: 7px
+
+@media (max-width: 992px) //medium
+	.container
+		font-size: 1.4em
+
+@media (max-width: 768px) //small
+	.container
+		font-size: 1.6em
+
+	.myProgress
+		height: 87%
+		bottom: 13%
+	
+	.progressATM
+		left: 12%
+		top: 61%
+
+	nav
+		flex-direction: row
