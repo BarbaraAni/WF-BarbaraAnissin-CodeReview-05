@@ -1,0 +1,71 @@
+body {
+  background-image: linear-gradient(20deg, lightpink, lightgoldenrodyellow, lightblue, lightpink); }
+
+.h1 {
+  font-family: "Bonbon", cursive;
+  padding: 5px;
+  font-size: 2.5em; }
+
+[id^=profileImg] {
+  object-fit: cover;
+  position: relative;
+  top: 0;
+  left: 0; }
+
+[id^=profImg] {
+  object-fit: cover;
+  position: relative;
+  top: 0;
+  left: 0; }
+
+[id^=favourite] {
+  position: relative;
+  top: 0;
+  left: 0; }
+
+[id^=col] {
+  position: relative;
+  top: 0;
+  left: 0; }
+
+.heart {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 999; }
+
+.heart:hover {
+  cursor: pointer; }
+
+.list-group-item-info {
+  padding: 7px;
+  border-radius: 5px; }
+
+.list-group-item-info:hover {
+  background-color: lightpink;
+  color: white;
+  text-decoration: none;
+  font-weight: bold; }
+
+.quote {
+  background-color: lightgrey;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px; }
+
+.detailText {
+  background-color: lightpink;
+  border-radius: 20px;
+  box-shadow: 0 0 10px grey; }
+
+#maincontent {
+  min-height: 310px; }
+
+.select {
+  box-shadow: 3px 3px 10px 2px grey;
+  width: 45%;
+  margin: 0 2.3%;
+  background-color: transparent;
+  border: solid transparent;
+  border-width: 1px 0; }
+
+/*# sourceMappingURL=style.css.map */
