@@ -13,7 +13,7 @@ $(document).ready(function() {
     	`);
     //append nav menu
     $("#navbar").append(`
-    	<li><a class="list-group-item-info" href="#">Dates</a> </li>
+    	<li><a class="list-group-item-info" href="index.html">Dates</a> </li>
     	<li><a class="list-group-item-info" href="#">Contact</a> </li>
     	<li><a class="list-group-item-info" href="#">About</a> </li>
     	<li><a class="list-group-item-info" href="#">Settings</a></li>
@@ -37,61 +37,63 @@ $(document).ready(function() {
 			<option value="">46+</option>
 			<option value="">Pets: under 15y</option>
 		</select>`)
-    //gender/pets filter function
-    var valG = ""
+    //gender/pets filter function  //age filter function
+
     document.getElementById("filter1").onclick = function() {
         valG = $("#filter1 :selected").text()
-        selectG()
-    }
-
-    function selectG() {
-        for (i = 0; i < profile.length; i++) {
-            if (profile[i].filter == valG) {
-                $("#col" + i).show()
-            } else if (valG == "Gender/Pets - all") {
-                $("#col" + i).show()
-            } else {
-                $("#col" + i).hide()
-            }
-        }
-    }
-    //age filter function
-    var valA = ""
-    document.getElementById("filter2").onclick = function() {
         valA = $("#filter2 :selected").text()
-        console.log(valA)
-        selectA()
+        console.log($("#filter1 :selected").text())
+        select()
+    }
+    document.getElementById("filter2").onclick = function() {
+        valG = $("#filter1 :selected").text()
+        valA = $("#filter2 :selected").text()
+        select()
     }
 
-    function selectA() {
+    function select() {
         for (i = 0; i < profile.length; i++) {
-            if (valA === "Pets: under 15y") {
+            if (valA === "Pets: under 15y" && valG == profile[i].filter || valA === "Pets: under 15y" && valG === "Gender/Pets - all" || valA === "Age - all" && valG === "Pets" || valA === "Pets: under 15y" && valG === "Pets") {
                 if (profile[i].age <= 15) {
                     $("#col" + i).show() //show pets
+                    $("#placeholder").hide()
                 } else {
                     $("#col" + i).hide() //hide men and women
+                    $("#placeholder").hide()
                 }
-
-            } else if (valA === "18-29") {
+            } else if (valA === "18-29" && valG == profile[i].filter || valA === "18-29" && valG === "Gender/Pets - all") {
                 if (profile[i].age <= 29 && profile[i].age >= 18) {
                     $("#col" + i).show() //show 18-29y
+                    $("#placeholder").hide()
                 } else {
                     $("#col" + i).hide() //hide other ages and pets
+                    $("#placeholder").hide()
                 }
-            } else if (valA === "30-45") {
+            } else if (valA === "30-45" && valG == profile[i].filter || valA === "30-45" && valG === "Gender/Pets - all") {
                 if (profile[i].age <= 45 && profile[i].age >= 30) {
                     $("#col" + i).show() //show 30-45y
+                    $("#placeholder").hide()
                 } else {
                     $("#col" + i).hide() //hide other ages and pets
+                    $("#placeholder").hide()
                 }
-            } else if (valA === "46+") {
+            } else if (valA === "46+" && valG == profile[i].filter || valA === "46+" && valG === "Gender/Pets - all") {
                 if (profile[i].age >= 46) {
                     $("#col" + i).show() //show 46y+
+                    $("#placeholder").hide()
                 } else {
                     $("#col" + i).hide() //hide younger and pets
+                    $("#placeholder").hide()
                 }
-            } else {
+            } else if (valA == "Age - all" && valG == profile[i].filter) {
+                $("#col" + i).show()
+                $("#placeholder").hide()
+            } else if (valA === "Age - all" && valG === "Gender/Pets - all") {
                 $("#col" + i).show() //show all 
+                $("#placeholder").hide()
+            } else {
+                $("#col" + i).hide()
+                $("#placeholder").show()
             }
         }
     }
@@ -108,8 +110,17 @@ $(document).ready(function() {
         	</div>
         </div>` /*div row end*/ )
     }
+    //append placeholder for filter error
+    $("#maincontent").append(`<p id="placeholder"></p>`)
     //hide red Heart in the beginning
     $("[id^=rHeart]").hide()
+    //hide placeholder for filter error
+    $("#placeholder").text("nothing found with these filters, try different ones").hide()
+    //drag and drop
+    $("#maincontent").sortable()
+    $("[id^=col]").draggable({
+        connectToSortable: "#maincontent"
+    });
     //append Favourites
     $("body").append(`
     	<div class="container">
@@ -137,6 +148,30 @@ $(document).ready(function() {
             $("#favourite" + idNum).remove()
         }
     })
+    $("body").append(`
+    	<div class="container">
+    		<div class=" row"> 
+    			<div class="col-5 ml-auto" id="progressbar"></div>
+    			<p class="col-1 ml-auto" id="plus">PLUS</p>
+    			<p class="col-1 ml-auto" id="progressLabel">20%</p>
+    		</div>
+    	</div>`)
+    
+        $("#progressbar").progressbar({
+                value: 20
+            })
+            .data("value", "20");
+
+        $("#plus").click(function() {
+            var currValue = $("#progressbar").data("value");
+            currValue = parseInt(currValue);
+            if (currValue <= 100) {
+                $("#progressbar").progressbar({
+                    value: currValue + 1
+                }).data("value", currValue + 1);
+                $("#progressLabel").html((currValue + 1) + "%");
+            }
+        });
 });
 
 //calculations to set heights and widths relative to img and div width
@@ -162,6 +197,4 @@ $(window).resize(imgHeight);
 
 
 //add progress bar
-//drag and drop - no clue how - google
-
-//option to filter both at same time
+//add heart in fav part
