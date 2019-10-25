@@ -101,14 +101,18 @@ $(document).ready(function() {
     $("body").append(`<div class="container"><div id="maincontent" class="row p-2"></div></div>`)
     for (i = 0; i < profile.length; i++) {
         $("#maincontent").append(`
-        	<div class="col-lg-3 col-md-6 col-sm-12" id="col${+i}">
-        		<img id="profileImg${+i}" class="card-img" src="${profile[i].pic}">
-        		<img class="heart" id="bHeart${+i}" src="./img/black_heart.png">
-        		<img class="heart" id="rHeart${+i}" src="./img/heart.png">
-        		<br>
-        		<div class="quote p-1"><quote>&quot${profile[i].quote}&quot</quote></div>
-        	</div>
-        </div>` /*div row end*/ )
+        		<div class="col-lg-3 col-md-6 col-sm-12" id="col${+i}">
+	        		<img id="profileImg${+i}" class="card-img" src="${profile[i].pic}">
+	        		<img class="heart" id="bHeart${+i}" src="./img/black_heart.png">
+	        		<img class="heart" id="rHeart${+i}" src="./img/heart.png">
+	        		<br>
+        			<div class="quote p-1"><quote>&quot${profile[i].quote}&quot</quote></div>        		
+        				<div id = "myProgress">
+                    		<div id = "myBar"></div>
+                    	</div>
+                    	<p><span id="progressATM${+i}">0</span>%</p> 
+                    </div>
+                <div>` /* div row end */ )
     }
     //append placeholder for filter error
     $("#maincontent").append(`<p id="placeholder"></p>`)
@@ -144,34 +148,19 @@ $(document).ready(function() {
 	            	<p>Special Skill: ${profile[idNum].special_skill}</p>
 	            <div>
             </div>`)
+            var progress = Number($("#progressATM"+idNum).text())
+            if (progress <= 99) {
+                progress++;
+                document.getElementById("myBar").style.width = progress + "%";
+                $("#progressATM" + idNum).text(progress)
+            } else {
+                document.getElementById("myBar").style.width = "100%";
+            }
         } else {
             $("#favourite" + idNum).remove()
         }
     })
-    $("body").append(`
-    	<div class="container">
-    		<div class=" row"> 
-    			<div class="col-5 ml-auto" id="progressbar"></div>
-    			<p class="col-1 ml-auto" id="plus">PLUS</p>
-    			<p class="col-1 ml-auto" id="progressLabel">20%</p>
-    		</div>
-    	</div>`)
-    
-        $("#progressbar").progressbar({
-                value: 20
-            })
-            .data("value", "20");
 
-        $("#plus").click(function() {
-            var currValue = $("#progressbar").data("value");
-            currValue = parseInt(currValue);
-            if (currValue <= 100) {
-                $("#progressbar").progressbar({
-                    value: currValue + 1
-                }).data("value", currValue + 1);
-                $("#progressLabel").html((currValue + 1) + "%");
-            }
-        });
 });
 
 //calculations to set heights and widths relative to img and div width
@@ -195,6 +184,5 @@ $(document).ready(imgHeight);
 $(window).resize(imgHeight);
 
 
-
-//add progress bar
-//add heart in fav part
+//add heart in fav part!!
+//error msg if filter empty not correct atm

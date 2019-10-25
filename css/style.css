@@ -74,9 +74,15 @@ body {
   margin-top: 10px;
   text-align: center; }
 
-#progressbar {
-  height: 20px;
-  width: 80px;
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+  height: 15px;
   border: 1px solid black; }
+
+#myBar {
+  width: 0%;
+  height: 14px;
+  background-color: #4CAF50; }
 
 /*# sourceMappingURL=style.css.map */
