@@ -164,8 +164,8 @@ $(document).ready(function() {
         $(".cancel").click(function(e) {
             var actual = Number((this.id).slice(6))
             $("#favourite" + actual).remove()
-            $("#bHeart" + actual).toggle()
-            $("#rHeart" + actual).toggle()
+            $("#bHeart" + actual).show()
+            $("#rHeart" + actual).hide()
         })
         //CALCulation for width of div of cancal - to be a circle always
         var cancelHeight = document.getElementById("cancel" + idNum).offsetHeight;
@@ -211,4 +211,8 @@ $(window).resize(imgHeight);
 /////OPEN
 //error msg if filter empty not correct atm
 
+
+
 //HOW TO GET ERROR MSG right?
+//little bug: if i add 2 favs and X the first of them in the bottom - the heart stays red at top - fixed
+//Progressbar() didn't work
